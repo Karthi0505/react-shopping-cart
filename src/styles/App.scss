@@ -1,0 +1,56 @@
+//@import "node_modules/bootstrap/scss/bootstrap";
+
+// Required
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+// Optional_utilities;
+@import "node_modules/bootstrap/scss/reboot";
+@import "node_modules/bootstrap/scss/utilities/display";
+@import "node_modules/bootstrap/scss/utilities/flex";
+@import "node_modules/bootstrap/scss/utilities/text";
+
+
+
+@import "./custom-bootstrap";
+
+$font-size: 1rem;
+
+/*Colors*/
+
+
+
+
+html {
+  font-size: $font-size;
+  color: #333
+}
+
+body,
+#root {
+  height: 100vh;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas: "header"
+  "main"
+  "footer";
+  grid-template-rows: 5rem 1fr 5rem;
+  grid-template-columns: 1fr;
+  height: 100%;
+}
+header {
+  grid-area: header;
+  background-color: $theme-bg;
+  color: $white;
+}
+main {
+  grid-area: main;
+}
+footer {
+  grid-area: footer;
+  background-color: $theme-bg;
+  color: $white;
+}
