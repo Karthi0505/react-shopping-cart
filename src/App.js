@@ -3,7 +3,7 @@ import './styles/App.scss';
 import FishIcon from './images/fish_icon.png';
 
 import Button from 'react-bootstrap/Button';
-
+//feature 1
 class App extends Component {
     render() {
   
