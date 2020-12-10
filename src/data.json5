@@ -1,0 +1,37 @@
+
+{
+    "products": [
+        { 
+          "_id": "fish1",
+          "title": "Fish 1",
+          "image": "images/fish_icon.png",
+          "description": "about fish 1",
+          "price": 200,
+          "availableSizes": ["small", "Big"]
+        },
+        { 
+          "_id": "fish2",
+          "title": "Fish 2",
+          "image": "images/fish_icon.png",
+          "description": "about fish 2",
+          "price": 250,
+          "availableSizes": ["small", "Big"]
+        },
+        { 
+          "_id": "fish3",
+          "title": "Fish 3",
+          "image": "images/fish_icon.png",
+          "description": "about fish 3",
+          "price": 300,
+          "availableSizes": ["small", "Big"]
+        },
+        { 
+          "_id": "fish4",
+          "title": "Fish 4",
+          "image": "images/fish_icon.png",
+          "description": "about fish 4",
+          "price": 350,
+          "availableSizes": ["small", "Big"]
+        }
+    ]
+}
