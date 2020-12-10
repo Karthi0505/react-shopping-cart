@@ -1,15 +1,19 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const json5 = require('json5');
+
 module.exports = {
   entry: {
-    main: './src/index.js'
+    main: './src/index.js',
   },
   output: {
     filename: '[name].bundle.js',
     path: __dirname + '/output_file'
   },
-  mode: 'development',
+  mode: 'development',  
+
+
   module: {
     rules:[
       {
@@ -26,6 +30,14 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource'
+      },
+      {
+        test: /\.json5$/i,
+        loader: 'json5-loader',
+        options: {
+          esModule: false,
+        },
+        type: 'javascript/auto'
       },
       {
         test: /\.(scss|css)$/,
