@@ -4,6 +4,7 @@ import FishIcon from './images/fish_icon.png';
 
 import  data from './data.json5';
 import Products from "./components/Products";
+import Filter from "./components/Filter";
 
 //feature 1
 class App extends Component {
@@ -15,6 +16,36 @@ class App extends Component {
             size:"",
             sort:""
         }
+    }
+    sortProducts = (event) => {
+        console.log(event.target.value);
+
+        const sort = event.target.value;
+        this.setState( (state)=>({
+            sort: sort,
+            products: this.state.products.slice().sort((a,b)=>(
+                sort === "lowest" ? //if sort value is equal to 'lowest'
+                    ( (a.price > b.price) ?  1:-1 ) //if a greater than b, return 1, else -1
+                : sort === "highest" ?
+                    ( (a.price < b.price) ?  1:-1 )
+                : a._id < b._id ?  1 : -1
+            )),
+        }) )
+    }
+    filterProducts = (event) => { 
+        console.log(event.target.value);
+
+        if(event.target.value === "") {
+            this.setState({size: event.target.value, products:data.products});
+        } else {
+            this.setState({
+                size: event.target.value,
+                products: data.products.filter(
+                    (product) => product.availableSizes.indexOf(event.target.value) >= 0
+                ),
+            });
+        }
+        
     }
 
     render() {  
@@ -31,7 +62,13 @@ class App extends Component {
                     <div className="container">
                         <div className="content row">
                             <div className="main col-md-9 mr-sm-auto col-lg-10 pt-3 px-4">
-                                <Products products={this.state.products} />
+                                <Filter count={this.state.products.length}
+                                    size={this.state.size}
+                                    sort={this.state.sort}
+                                    filterProducts={this.filterProducts}
+                                    sortProducts={this.sortProducts}
+                                ></Filter>
+                                <Products products={this.state.products}></Products>
                             </div>
                             <aside className="sidebar col-md-2 d-none d-md-block ">
 
