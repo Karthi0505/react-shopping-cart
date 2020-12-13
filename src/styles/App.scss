@@ -76,3 +76,32 @@ ul.products {
 button.product_addToCart {
   margin-top: 5px;
 }
+
+/*-- Sidebar CSS --*/
+.cart .cart_header{
+  border-bottom: 1px solid #dee2e6
+}
+.cart ul.cart_items{
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+}
+.cart ul.cart_items img{
+  width: 5rem;
+}
+.cart ul.cart_items li {
+  display: flex;
+}
+.cart .total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width:100%;
+}
+.cart .total > div{
+  font-size: 1.5rem;;
+}
+.cart .total > div,
+.cart .total > button{
+  flex: 1;
+}

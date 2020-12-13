@@ -5,6 +5,7 @@ import FishIcon from './images/fish_icon.png';
 import  data from './data.json5';
 import Products from "./components/Products";
 import Filter from "./components/Filter";
+import Cart from "./components/Cart";
 
 //feature 1
 class App extends Component {
@@ -13,9 +14,31 @@ class App extends Component {
         super();
         this.state = {
             products: data.products,
+            cartItems: [], //means there is no item in cart by default
             size:"",
             sort:""
         }
+    }
+    removeFromCart = (product) => {
+        const cartItems = this.state.cartItems.slice();
+        this.setState({
+            cartItems: cartItems.filter(x=> x._id !== product._id),
+        })
+        
+    }
+    addToCart = (product) => {
+        const cartItems = this.state.cartItems.slice();
+        let alreadyInCart = false;
+        cartItems.forEach((item) => {
+            if(item._id === product._id) {
+                item.count++;
+                alreadyInCart = true;
+            }
+        });
+        if(!alreadyInCart){
+            cartItems.push({...product, count:1})
+        }
+        this.setState({cartItems})
     }
     sortProducts = (event) => {
         console.log(event.target.value);
@@ -61,16 +84,24 @@ class App extends Component {
                 <main>
                     <div className="container">
                         <div className="content row">
-                            <div className="main col-md-9 mr-sm-auto col-lg-10 pt-3 px-4">
+                            <div className="main col-md-9 mr-sm-auto col-lg-9 pt-3 px-4">
                                 <Filter count={this.state.products.length}
                                     size={this.state.size}
                                     sort={this.state.sort}
                                     filterProducts={this.filterProducts}
                                     sortProducts={this.sortProducts}
                                 ></Filter>
-                                <Products products={this.state.products}></Products>
+                                <Products 
+                                    products={this.state.products}
+                                    addToCart={this.addToCart}
+                                ></Products>
                             </div>
-                            <aside className="sidebar col-md-2 d-none d-md-block ">
+                            <aside className="sidebar col-md-3 d-none d-md-block ">
+
+                                <Cart 
+                                    cartItems={this.state.cartItems} 
+                                    removeFromCart={this.removeFromCart}
+                                />
 
                             </aside>
                         </div>
