@@ -14,17 +14,24 @@ class App extends Component {
         super();
         this.state = {
             products: data.products,
-            cartItems: [], //means there is no item in cart by default
-            size:"",
-            sort:""
-        }
+            cartItems: localStorage.getItem("cartItems") ?
+                JSON.parse(localStorage.getItem("cartItems")) : [], //means there is no item in cart by default
+            size: "",
+            sort: "",
+        };
+    }
+    createOrder = (order) => {
+        alert("Need to save order for " + order.name)
     }
     removeFromCart = (product) => {
         const cartItems = this.state.cartItems.slice();
         this.setState({
             cartItems: cartItems.filter(x=> x._id !== product._id),
-        })
-        
+        });
+        localStorage.setItem( 
+            "cartItems", 
+            JSON.stringify(cartItems.filter(x=> x._id !== product._id)) 
+        );        
     }
     addToCart = (product) => {
         const cartItems = this.state.cartItems.slice();
@@ -38,7 +45,8 @@ class App extends Component {
         if(!alreadyInCart){
             cartItems.push({...product, count:1})
         }
-        this.setState({cartItems})
+        this.setState({ cartItems });
+        localStorage.setItem( "cartItems", JSON.stringify(cartItems) );
     }
     sortProducts = (event) => {
         console.log(event.target.value);
@@ -101,13 +109,13 @@ class App extends Component {
                                 <Cart 
                                     cartItems={this.state.cartItems} 
                                     removeFromCart={this.removeFromCart}
+                                    createOrder={this.createOrder}
                                 />
 
                             </aside>
                         </div>
                     </div>
                 </main>
-                <h1 className="text-primary"> Hello, World! </h1>
                 
                 <footer className="d-flex justify-content-center align-items-center">
                     <p>All right is reserved</p>
