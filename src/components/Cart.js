@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button';
+import Fade from 'react-reveal/Fade';
 
 export default class Cart extends Component {
     constructor(props){
@@ -36,26 +37,28 @@ export default class Cart extends Component {
 
                 <div>
                     <div>
-                        <ul className="cart_items">
-                            {cartItems.map((item) => (
-                               
-                                <li key={item._id}>
-                                    <div>
-                                        //<img src={item.img} alt={item.title}></img>
-                                    </div>
-                                    <div>
-                                        <div>{item.title}</div>
+                        <Fade left cascade>
+                            <ul className="cart_items">
+                                {cartItems.map((item) => (
+                                
+                                    <li key={item._id}>
                                         <div>
-                                            {item.price} x {item.count}
-                                            <Button variant="danger" onClick={() => this.props.removeFromCart(item)}>
-                                                Remove
-                                            </Button>
+                                            //<img src={item.img} alt={item.title}></img>
                                         </div>
-                                        
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
+                                        <div>
+                                            <div>{item.title}</div>
+                                            <div>
+                                                {item.price} x {item.count}
+                                                <Button variant="danger" onClick={() => this.props.removeFromCart(item)}>
+                                                    Remove
+                                                </Button>
+                                            </div>
+                                            
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </Fade>
                     </div>
 
                     {cartItems.length !== 0 && (
@@ -73,42 +76,50 @@ export default class Cart extends Component {
                             </div>
                             
                             {this.state.showCheckout && (
-                                <div>
-                                    <form onSubmit={this.createOrder}>
-                                        <ul className="form-container">
-                                            <li>
-                                                <label>Email</label>
-                                                <input 
-                                                    name="email"
-                                                    type="email" 
-                                                    required 
-                                                    onChange={this.handleInput}
-                                                ></input>
-                                            </li>
-                                            <li>
-                                                <label>Name</label>
-                                                <input
-                                                    name="name"
-                                                    type="text"
-                                                    required
-                                                    onChange={this.handleInput}
-                                                ></input>
-                                            </li>
-                                            <li>
-                                                <label>Address</label>
-                                                <input
-                                                    name="address"
-                                                    type="text"
-                                                    required
-                                                    onChange={this.handleInput}
-                                                ></input>
-                                            </li>
-                                            <li>
-                                                <button type="submit">Checkout</button>
-                                            </li>
-                                        </ul>
-                                    </form>
-                                </div>
+                                <Fade right cascade>
+                                    <div>
+                                        <form onSubmit={this.createOrder}>
+                                            <ul className="form-container list-unstyled">
+                                                <li className="form-group">
+                                                    <label>Email</label>
+                                                    <input 
+                                                        className="form-control"
+                                                        name="email"
+                                                        type="email" 
+                                                        required 
+                                                        onChange={this.handleInput}
+                                                        aria-describedby="emailHelp"
+                                                        placeholder="Enter email"
+                                                    ></input>
+                                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                                </li>
+                                                <li className="form-group">
+                                                    <label>Name</label>
+                                                    <input
+                                                        className="form-control"
+                                                        name="name"
+                                                        type="text"
+                                                        required
+                                                        onChange={this.handleInput}
+                                                    ></input>
+                                                </li>
+                                                <li className="form-group">
+                                                    <label>Address</label>
+                                                    <input
+                                                        className="form-control"
+                                                        name="address"
+                                                        type="text"
+                                                        required
+                                                        onChange={this.handleInput}
+                                                    ></input>
+                                                </li>
+                                                <li>
+                                                    <button type="submit">Checkout</button>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </Fade>
                             )}
                         </div>
                     )}

@@ -105,3 +105,20 @@ button.product_addToCart {
 .cart .total > button{
   flex: 1;
 }
+
+/*--  --*/
+.modal .product-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-height: 96vh;
+}
+.modal .product-details img {
+  max-height: 100vh;
+  max-width: 46rem;
+  margin: 0 auto;
+}
+.modal .product-details .product-details_description {
+  flex: 1 1;
+  margin: 1rem;
+}
