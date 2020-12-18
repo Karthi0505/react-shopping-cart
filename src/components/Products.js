@@ -1,34 +1,129 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import '../styles/App.scss';
 import Button from 'react-bootstrap/Button';
+import Fade from 'react-reveal/Fade';
+import Modal from 'react-bootstrap/Modal';
+import Zoom from 'react-reveal/Zoom';
 
 export default class Products extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            product: null,
+        };
+
+        this.handleShow = this.handleShow.bind(this);
+		this.handleClose = this.handleClose.bind(this);
+		this.state = {
+			show: false,
+		};
+        
+    }
+    handleShow = (product) => {
+        this.setState({ show: true, product: product });
+        
+    }
+    handleClose = () => {
+        this.setState({ show: false, product: null });
+    }
+
     render() {
+
+        const { product } = this.state;
+
+        /* const [show, setShow] = useState(false);
+        const handleClose = () => setShow(false);
+        const handleShow = () => setShow(true);*/
+
         return (
             <div >
-                <ul className="products row">
-                    {/*get a list of products as a props from parent component. So use 'this'*/}
-                    {this.props.products.map(product => (
-                        <li key={product._id} className="col-md-4">
-                            <div className="product card mb-4 shadow">
-                                <a href={"#" + product._id}>
-                                    <img src={product.image} alt={product.title}></img>
-                                </a>
-                                <div className="card-body">
-                                    <p className="product_title">
-                                        {product.title}
-                                    </p>
-                                    <div className="product_price">
-                                        <div>₹ {product.price}</div>
-                                        <Button 
-                                            onClick={() => this.props.addToCart(product)} 
-                                            variant="primary" className="product_addToCart">Add to cart</Button>
+                <Fade bottom cascade>
+                    <ul className="products row">
+                        {/*get a list of products as a props from parent component. So use 'this'*/}
+                        {this.props.products.map(product => (
+                            <li key={product._id} className="col-md-4">
+                                <div className="product card mb-4 shadow">
+                                    <a
+                                        href={"#" + product._id}
+                                        onClick={ ()=> this.handleShow(product) }
+                                        >
+                                        <img src={product.image} alt={product.title}></img>
+                                    </a>
+                                    <div className="card-body">
+                                        <p className="product_title">
+                                            {product.title}
+                                        </p>
+                                        <div className="product_price">
+                                            <div>₹ {product.price}</div>
+                                            <Button 
+                                                onClick={() => this.props.addToCart(product)} 
+                                                variant="primary" className="product_addToCart">Add to cart</Button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+                            </li>
+                        ))}
+                    </ul>
+                </Fade>
+                
+                {product && (
+                    <Modal  show={this.state.show} onHide={this.handleClose}>
+                        <Modal.Header closeButton>
+                        <Modal.Title>Modal heading</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Zoom>
+                                <div className="product-details">
+                                    <img src={product.image} alt={product.title}></img>
+                                    <div className="product-details_description">
+                                        <p>
+                                          <strong>{product.title}</strong>
+                                        </p>
+                                        <p>
+                                          <strong>{product.description}</strong>
+                                        </p>
+                                        <p>
+                                        Available Sizes: {" "}
+                                          {product.availableSizes.map(x => (
+                                              <span>
+                                                  {" "}
+                                                  <button>{x}</button>
+                                              </span>
+                                          ))}
+                                    </p>
+                                    <div className="product-price">
+                                        <div>{product.price}</div>
+                                        <button onClick={() => {
+                                            this.props.addToCart(product);
+                                            this.handleClose();
+                                        }}>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </Zoom>
+                        </Modal.Body>
+                        <Modal.Footer>
+                        <Button variant="secondary" onClick={this.handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={this.handleClose}>
+                            Save Changes
+                        </Button>
+                        </Modal.Footer>
+                    </Modal>
+                )}
+
+
+                
+
+                
+                
+
+
+
+
             </div>
         )
     }
