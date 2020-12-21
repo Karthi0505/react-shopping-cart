@@ -1,12 +1,13 @@
-import React, { Component, useEffect, useState } from 'react'
-import '../styles/App.scss';
-import Button from 'react-bootstrap/Button';
-import Fade from 'react-reveal/Fade';
-import Modal from 'react-bootstrap/Modal';
-import Zoom from 'react-reveal/Zoom';
+import React, { Component, useEffect, useState } from "react";
+import "../styles/App.scss";
+import Button from "react-bootstrap/Button";
+import Fade from "react-reveal/Fade";
+import Modal from "react-bootstrap/Modal";
+import Zoom from "react-reveal/Zoom";
+import { connect } from "react-redux";
+import { fetchProducts } from "../actions/productActions";
 
-
-export default class Products extends Component {
+class Products extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,8 +19,12 @@ export default class Products extends Component {
 		this.state = {
 			show: false,
 		};
-        
     }
+
+    componentDidMount() {
+        this.props.fetchProducts();
+    }
+
     handleShow = (product) => {
         this.setState({ show: true, product: product });
         
@@ -39,7 +44,10 @@ export default class Products extends Component {
         return (
             <div >
                 <Fade bottom cascade>
-                    <ul className="products row">
+                    {!this.props.products ? (
+                        <div>Loading</div>
+                    ) : (
+                        <ul className="products row">
                         {/*get a list of products as a props from parent component. So use 'this'*/}
                         {this.props.products.map(product => (
                             <li key={product._id} className="col-md-4">
@@ -65,6 +73,7 @@ export default class Products extends Component {
                             </li>
                         ))}
                     </ul>
+                    )}
                 </Fade>
                 
                 {product && (
@@ -117,15 +126,11 @@ export default class Products extends Component {
                 )}
 
 
-                
-
-                
-                
-
-
-
-
             </div>
         )
     }
 }
+
+export default connect((state) => ({ products: state.products.items }), {
+    fetchProducts,
+})(Products);
