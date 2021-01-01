@@ -1,9 +1,10 @@
-import React, { Component, useEffect, useState } from "react";
-import "../styles/App.scss";
-import Button from "react-bootstrap/Button";
-import Fade from "react-reveal/Fade";
-import Modal from "react-bootstrap/Modal";
-import Zoom from "react-reveal/Zoom";
+import React, { Component, useEffect, useState } from 'react'
+import '../styles/App.scss';
+import Button from 'react-bootstrap/Button';
+import Fade from 'react-reveal/Fade';
+import Modal from 'react-bootstrap/Modal';
+import Zoom from 'react-reveal/Zoom';
+
 import { connect } from "react-redux";
 import { fetchProducts } from "../actions/productActions";
 
@@ -20,7 +21,7 @@ class Products extends Component {
 			show: false,
 		};
     }
-
+    
     componentDidMount() {
         this.props.fetchProducts();
     }
@@ -42,12 +43,12 @@ class Products extends Component {
         const handleShow = () => setShow(true);*/
 
         return (
-            <div >
+            <div>
                 <Fade bottom cascade>
-                    {!this.props.products ? (
-                        <div>Loading</div>
+                  {!this.props.products ? (
+                        <div>Loading... products are null</div>
                     ) : (
-                        <ul className="products row">
+                    <ul className="products row">
                         {/*get a list of products as a props from parent component. So use 'this'*/}
                         {this.props.products.map(product => (
                             <li key={product._id} className="col-md-4">
@@ -56,7 +57,7 @@ class Products extends Component {
                                         href={"#" + product._id}
                                         onClick={ ()=> this.handleShow(product) }
                                         >
-                                        <img src={product.image} alt={product.title}></img>
+                                        <img src={product.image} alt={product.title} className="img-fluid"></img>
                                     </a>
                                     <div className="card-body">
                                         <p className="product_title">
@@ -73,7 +74,7 @@ class Products extends Component {
                             </li>
                         ))}
                     </ul>
-                    )}
+                  )}
                 </Fade>
                 
                 {product && (
@@ -84,7 +85,7 @@ class Products extends Component {
                         <Modal.Body>
                             <Zoom>
                                 <div className="product-details">
-                                    <img src={product.image} alt={product.title}></img>
+                                    <img src={product.image} alt={product.title} className="img-fluid"></img>
                                     <div className="product-details_description">
                                         <p>
                                           <strong>{product.title}</strong>
@@ -130,7 +131,6 @@ class Products extends Component {
         )
     }
 }
-
 export default connect((state) => ({ products: state.products.items }), {
     fetchProducts,
 })(Products);

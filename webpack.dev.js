@@ -5,7 +5,7 @@ module.exports =  {
   mode: 'development',
   devServer: {
     historyApiFallback: true,
-    contentBase: __dirname + 'output_file',
+    contentBase: path.resolve(__dirname, 'dist'),
     open: true,
     compress: true,
     hot: true,
@@ -13,7 +13,7 @@ module.exports =  {
   },
 
   plugins: [
-    // Only update what has changed on hot reload
+    /* Only update what has changed on hot reload*/
     new webpack.HotModuleReplacementPlugin(),
   ],
 };
