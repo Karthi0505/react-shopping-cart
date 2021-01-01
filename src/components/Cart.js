@@ -43,7 +43,7 @@ export default class Cart extends Component {
                                 
                                     <li key={item._id}>
                                         <div>
-                                            //<img src={item.img} alt={item.title}></img>
+                                            <img src={item.image} alt={item.title} className="img-fluid"></img>
                                         </div>
                                         <div>
                                             <div>{item.title}</div>

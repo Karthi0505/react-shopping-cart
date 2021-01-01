@@ -1,36 +1,45 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const json5 = require('json5');
+const json5 = require("json5");
+const path = require("path");
+
+const DIST_DIR = path.resolve(__dirname, 'dist');
+const SRC_DIR = path.resolve(__dirname, 'src');
 
 module.exports = {
-  entry: {
-    main: './src/index.js',
-  },
+  devtool: 'source-map',
+  entry: SRC_DIR + "/index.js",
   output: {
-    filename: '[name].bundle.js',
-    path: __dirname + '/output_file'
+    path: DIST_DIR,
+    filename: "my-first-webpack.bundle.js",
   },
-  mode: 'development',  
+  mode: 'development',
 
 
   module: {
-    rules:[
+    rules: [
       {
-          //I added |jsx
-        test: /\.m?js|jsx$/,
+        //I added |jsx
+        test: /\.m?js$|jsx$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: ['@babel/preset-env'],
           }
         }
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource'
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: 'images/',
+          publicPath: 'images/',
+        },
       },
+
       {
         test: /\.json5$/i,
         loader: 'json5-loader',
@@ -41,7 +50,7 @@ module.exports = {
       },
       {
         test: /\.(scss|css)$/,
-        use: [          
+        use: [
           // Creates `style` nodes from JS strings
           "style-loader",
           // Translates CSS into CommonJS
@@ -56,9 +65,11 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: __dirname + 'output_file',
+    inline: true,
+    contentBase: DIST_DIR,
     compress: true,
-    port: 9000
+    port: 9000,
+    proxy: { "/api/**": { target: 'http://localhost:5000' }  }
   },
 
   plugins: [
