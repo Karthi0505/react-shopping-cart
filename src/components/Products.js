@@ -50,7 +50,7 @@ class Products extends Component {
                     ) : (
                     <ul className="products row">
                         {/*get a list of products as a props from parent component. So use 'this'*/}
-                        {this.props.products.map(product => (
+                        {this.props.products.map((product) => (
                             <li key={product._id} className="col-md-4">
                                 <div className="product card mb-4 shadow">
                                     <a
@@ -131,6 +131,9 @@ class Products extends Component {
         )
     }
 }
-export default connect((state) => ({ products: state.products.items }), {
-    fetchProducts,
-})(Products);
+export default connect(
+    (state) => ({ products: state.products.filteredItems }),
+    {
+        fetchProducts,
+    }
+)(Products);
