@@ -119,12 +119,12 @@ class Products extends Component {
                             </Zoom>
                         </Modal.Body>
                         <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={this.handleClose}>
-                            Save Changes
-                        </Button>
+                            <Button variant="secondary" onClick={this.handleClose}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={this.handleClose}>
+                                Save Changes
+                            </Button>
                         </Modal.Footer>
                     </Modal>
                 )}
