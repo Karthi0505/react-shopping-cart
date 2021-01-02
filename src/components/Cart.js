@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button';
-import Fade from 'react-reveal/Fade';
+import React, { Component } from "react"
+import Button from "react-bootstrap/Button";
+import Fade from "react-reveal/Fade";
+import { connect } from "react-redux";
+import { removeFromCart } from "../actions/cartActions";
 
-export default class Cart extends Component {
+class Cart extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -10,7 +12,7 @@ export default class Cart extends Component {
             email: "",
             address: "",
             showCheckout: false,
-        }
+        };
     }
     handleInput = (e) => {
         this.setState({ [e.target.name]: e.target.value });
@@ -29,11 +31,11 @@ export default class Cart extends Component {
         const {cartItems} = this.props;
         return (
             <div className="cart">
-                {cartItems.length === 0? (
+                {cartItems.length === 0 ? (
                     <div className="cart cart_header">Cart is empty</div>
                 ) : (
-                    <div className="cart cart_header">You have {cartItems.length} in the cart{" "}</div>
-                )}
+                        <div className="cart cart_header">You have {cartItems.length} in the cart{" "}</div>
+                    )}
 
                 <div>
                     <div>
@@ -49,7 +51,10 @@ export default class Cart extends Component {
                                             <div>{item.title}</div>
                                             <div>
                                                 {item.price} x {item.count}
-                                                <Button variant="danger" onClick={() => this.props.removeFromCart(item)}>
+                                                <Button
+                                                    variant="danger"
+                                                    onClick={() => this.props.removeFromCart(item)}
+                                                >
                                                     Remove
                                                 </Button>
                                             </div>
@@ -68,8 +73,8 @@ export default class Cart extends Component {
                                     Total:{" "}
                                     {cartItems.reduce((a, c) => a + c.price * c.count, 0)}
                                 </div>
-                                <Button 
-                                    onClick={()=>{this.setState({showCheckout: true})}} 
+                                <Button
+                                    onClick={() => { this.setState({ showCheckout: true }) }}
                                     variant="success">
                                     Proceed
                                 </Button>
@@ -82,11 +87,11 @@ export default class Cart extends Component {
                                             <ul className="form-container list-unstyled">
                                                 <li className="form-group">
                                                     <label>Email</label>
-                                                    <input 
+                                                    <input
                                                         className="form-control"
                                                         name="email"
-                                                        type="email" 
-                                                        required 
+                                                        type="email"
+                                                        required
                                                         onChange={this.handleInput}
                                                         aria-describedby="emailHelp"
                                                         placeholder="Enter email"
@@ -127,6 +132,13 @@ export default class Cart extends Component {
                 </div>
                 
             </div>
-        )
+        );
     }
 }
+
+export default connect(
+    (state) => ({
+        cartItems: state.cart.cartItems,
+    }),
+    { removeFromCart }
+)(Cart);
