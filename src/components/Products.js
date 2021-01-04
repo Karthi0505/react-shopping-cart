@@ -92,40 +92,42 @@ class Products extends Component {
                                           <strong>{product.title}</strong>
                                         </p>
                                         <p>
-                                          <strong>{product.description}</strong>
+                                          {product.description}
                                         </p>
-                                        <p>
+                                        {/*<p>
                                         Available Sizes: {" "}
                                           {product.availableSizes.map(x => (
                                               <span>
                                                   {" "}
-                                                  <button>{x}</button>
+                                                  <Button variant="light">{x}</Button>
                                               </span>
                                           ))}
-                                    </p>
-                                    <div className="product-price">
-                                        <div>{product.price}</div>
-                                        <button
-                                            onClick={() => {
-                                            this.props.addToCart(product);
-                                            this.handleClose();
-                                            }}
-                                        >
-                                            Add to Cart
-                                        </button>
-                                    </div>
+                                          </p>*/}
+                                        <div className="product-price">
+                                            <div>
+                                                Price:
+                                                <span className="priceAmount"> ₹ {product.price}</span>
+                                            </div>
+                                            <Button variant="primary"
+                                                onClick={() => {
+                                                this.props.addToCart(product);
+                                                this.handleClose();
+                                                }}
+                                            >
+                                                Add to Cart
+                                            </Button>
+                                        </div>
                                     </div>
                                 </div>
                             </Zoom>
                         </Modal.Body>
+                        {/*
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.handleClose}>
                                 Close
                             </Button>
-                            <Button variant="primary" onClick={this.handleClose}>
-                                Save Changes
-                            </Button>
                         </Modal.Footer>
+                        */}
                     </Modal>
                 )}
 

@@ -76,6 +76,11 @@ ul.products {
 button.product_addToCart {
   margin-top: 5px;
 }
+.product-price .priceAmount {
+  color: #B12704;
+  font-weight: 500;
+  font-size: 18px;
+}
 
 /*-- Sidebar CSS --*/
 .cart .cart_header{
@@ -93,17 +98,10 @@ button.product_addToCart {
   display: flex;
 }
 .cart .total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width:100%;
+
 }
 .cart .total > div{
   font-size: 1.5rem;;
-}
-.cart .total > div,
-.cart .total > button{
-  flex: 1;
 }
 
 /*--  --*/
@@ -111,14 +109,15 @@ button.product_addToCart {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-height: 96vh;
 }
 .modal .product-details img {
-  max-height: 100vh;
-  max-width: 46rem;
+  width: 100%;
   margin: 0 auto;
 }
 .modal .product-details .product-details_description {
   flex: 1 1;
   margin: 1rem;
+}
+.modal .product-details .product-details_description p { 
+  margin-bottom: 5px;
 }
