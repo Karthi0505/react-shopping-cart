@@ -24,21 +24,11 @@ class Cart extends Component {
 		};
     }
     
-    handleShow = () => {
-        this.setState({ show: true });
-        
-    }
-    handleClose = () => {
-        this.setState({ show: false });
-        this.props.clearOrder();
-    }
-    
-
     handleInput = (e) => {
         this.setState({ [e.target.name]: e.target.value });
-    }
+    };
     createOrder = (e) => {
-        e.preventDefault(); //Dont refresh when submiting form
+        e.preventDefault(); /*Dont refresh when submiting form*/
         const order = {
             name: this.state.name,
             email: this.state.email,
@@ -48,6 +38,15 @@ class Cart extends Component {
         };
         this.props.createOrder(order);
     };
+        
+    handleShow = () => {
+        this.setState({ show: true });
+    };
+    handleClose = () => {
+        this.setState({ show: false });
+        this.props.clearOrder();
+    };
+    
     render() {
         const {cartItems, order} = this.props;
         return (

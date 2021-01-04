@@ -7,46 +7,38 @@ import Fish2 from './images/yellow-fishes.jpg';
 import Fish3 from './images/grill-fishes.jpg';
 import Fish4 from './images/cut-fishes.jpg';
 
-import Products from "./components/Products";
-import Filter from "./components/Filter";
-import Cart from "./components/Cart";
-
 import store from "./store";
 import { Provider } from "react-redux";
+import { BrowserRouter, Route, Link } from "react-router-dom";
+import HomeScreen from "./screens/HomeScreen";
+import AdminScreen from "./screens/AdminScreen";
 
 //feature 1
 class App extends React.Component {
-
     render() {        
         return ( 
-          <Provider store={store}>
-            <div className="App grid-container">
+            <Provider store={store}>
+              <BrowserRouter>
+                  <div className="App grid-container">
 
-                <header className="d-flex align-items-center">
-                    <a href="/">
-                        <img src={FishIcon} alt="Kadal to Kitchen logo" />
-                    </a>
-                </header>
-                <main>
-                    <div className="container">
-                        <div className="content row">
-                            <div className="main col-md-9 mr-sm-auto col-lg-9 pt-3 px-4">
-                                <Filter></Filter>
-                                <Products></Products>
-                            </div>
-                            <aside className="sidebar col-md-3 d-none d-md-block ">
-
-                                <Cart />
-
-                            </aside>
+                     <header>
+                       <div className="container d-flex align-items-center justify-content-between"> 
+                           <Link to="/">
+                              <img src={FishIcon} alt="Kadal to Kitchen logo" />
+                           </Link>                       
+                           <Link to="/admin">Admin</Link>
                         </div>
-                    </div>
-                </main>
-                
-                <footer className="d-flex justify-content-center align-items-center">
-                    <p>All right is reserved</p>
-                </footer>
-            </div>
+                     </header>
+                     <main>
+                        <Route path="/admin" component={AdminScreen} />
+                        <Route path="/" component={HomeScreen} exact />
+                     </main>
+                     
+                     <footer className="d-flex justify-content-center align-items-center">
+                           <p>All right is reserved</p>
+                     </footer>
+                  </div>
+              </BrowserRouter>
           </Provider>
         );
     }

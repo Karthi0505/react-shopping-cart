@@ -69,7 +69,10 @@ module.exports = {
     contentBase: DIST_DIR,
     compress: true,
     port: 9000,
-    proxy: { "/api/**": { target: 'http://localhost:5000' }  }
+    proxy: {
+      "/api/**": { target: 'http://localhost:5000' },
+    },
+    historyApiFallback: true
   },
 
   plugins: [

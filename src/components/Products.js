@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component } from 'react'
 import '../styles/App.scss';
 import Button from 'react-bootstrap/Button';
 import Fade from 'react-reveal/Fade';
