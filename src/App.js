@@ -26,7 +26,7 @@ class App extends React.Component {
                            <Link to="/">
                               <img src={FishIcon} alt="Kadal to Kitchen logo" />
                            </Link>                       
-                           <Link to="/admin">Admin</Link>
+                           <Link to="/admin" className="text-light">Admin</Link>
                         </div>
                      </header>
                      <main>

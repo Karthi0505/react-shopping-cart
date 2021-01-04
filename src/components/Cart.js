@@ -50,7 +50,7 @@ class Cart extends Component {
     render() {
         const {cartItems, order} = this.props;
         return (
-            <div className="cart">
+            <div className="cart pt-3">
                 {cartItems.length === 0 ? (
                     <div className="cart cart_header">Cart is empty</div>
                 ) : (
@@ -72,34 +72,34 @@ class Cart extends Component {
                                     <h2>Order {order._id}</h2>
                                     <ul>
                                         <li>
-                                            <div>Name:</div>
-                                            <div>{order.name}</div>
+                                            <span className="font-italic text-muted">Name: </span> 
+                                            <span className="user-select-all">{order.name}</span>
                                         </li>
                                         <li>
-                                            <div>Email:</div>
-                                            <div>{order.email}</div>
+                                            <span className="font-italic text-muted">Email: </span> 
+                                            <span className="user-select-all">{order.email}</span>
                                         </li>
                                         <li>
-                                            <div>Address:</div>
-                                            <div>{order.address}</div>
+                                            <span className="font-italic text-muted">Address: </span> 
+                                            <span className="user-select-all">{order.address}</span>
                                         </li>
                                         <li>
-                                            <div>Date:</div>
-                                            <div>{order.createdAt}</div>
+                                            <span className="font-italic text-muted">Date: </span> 
+                                            <span className="user-select-all">{order.createdAt}</span>
                                         </li>
                                         <li>
-                                            <div>Total:</div>
-                                            <div>{order.total}</div>
+                                            <span className="font-italic text-muted">Total: </span> 
+                                            <span className="user-select-all">{order.total}</span>
                                         </li>
                                         <li>
-                                            <div>Cart Items:</div>
-                                            <div>
+                                            <span className="font-italic text-muted">Cart Items: </span> 
+                                            <span className="user-select-all">
                                                 {order.cartItems.map((x) => (
                                                     <div>
                                                         {x.count} {" x "} {x.title} 
                                                     </div>
                                                 ))}
-                                            </div>
+                                            </span>
                                         </li>
                                     </ul>
                                 </div>
@@ -117,14 +117,14 @@ class Cart extends Component {
                             <ul className="cart_items">
                                 {cartItems.map((item) => (
                                 
-                                    <li key={item._id}>
+                                    <li key={item._id} className="mt-3">
                                         <div>
                                             <img src={item.image} alt={item.title} className="img-fluid"></img>
                                         </div>
                                         <div>
-                                            <div>{item.title}</div>
+                                            <div className="pl-2 pr-2">{item.title}</div>
                                             <div>
-                                                {item.price} x {item.count}
+                                                <span className="pl-2 pr-2">{item.price} x {item.count}</span>
                                                 <Button
                                                     variant="danger"
                                                     onClick={() => this.props.removeFromCart(item)}
@@ -142,8 +142,8 @@ class Cart extends Component {
 
                     {cartItems.length !== 0 && (
                         <div>
-                            <div className="total">
-                                <div>
+                            <div className="total mb-4">
+                                <div className="mb-2">
                                     Total:{" "}
                                     {cartItems.reduce((a, c) => a + c.price * c.count, 0)}
                                 </div>
@@ -151,7 +151,9 @@ class Cart extends Component {
                                     onClick={() => {
                                         this.setState({ showCheckout: true });
                                     }}
-                                    variant="success">
+                                    variant="success" 
+                                    block
+                                >
                                     Proceed
                                 </Button>
                             </div>
@@ -159,10 +161,11 @@ class Cart extends Component {
                             {this.state.showCheckout && (
                                 <Fade right cascade>
                                     <div>
+                                        <h4 className="h5">Enter Details</h4>
                                         <form onSubmit={this.createOrder}>
                                             <ul className="form-container list-unstyled">
                                                 <li className="form-group">
-                                                    <label>Email</label>
+                                                    <label className="font-weight-bold">Email</label>
                                                     <input
                                                         className="form-control"
                                                         name="email"
@@ -172,10 +175,9 @@ class Cart extends Component {
                                                         aria-describedby="emailHelp"
                                                         placeholder="Enter email"
                                                     ></input>
-                                                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                                                 </li>
                                                 <li className="form-group">
-                                                    <label>Name</label>
+                                                    <label className="font-weight-bold">Name</label>
                                                     <input
                                                         className="form-control"
                                                         name="name"
@@ -185,7 +187,7 @@ class Cart extends Component {
                                                     ></input>
                                                 </li>
                                                 <li className="form-group">
-                                                    <label>Address</label>
+                                                    <label className="font-weight-bold">Address</label>
                                                     <input
                                                         className="form-control"
                                                         name="address"
@@ -195,10 +197,15 @@ class Cart extends Component {
                                                     ></input>
                                                 </li>
                                                 <li>
-                                                    <button
+                                                    <Button
+                                                        variant="success"
+                                                        size="lg"
+                                                        block
                                                         type="submit"
                                                         onClick={ ()=> this.handleShow() }
-                                                    >Checkout</button>
+                                                    >
+                                                        Checkout
+                                                    </Button>
                                                 </li>
                                             </ul>
                                         </form>
