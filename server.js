@@ -6,7 +6,14 @@ const shortid = require("shortid");
 const app = express();
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost/kadal2kitchen-db", {
+/* To render static file inside build folder */
+app.use("/", express.static(__dirname + "/dist"));
+/*instead of root.index.html, to render automatically from root address of our site */
+app.get("/", (req, res) => res.sendFile(__dirmane + "/dist/index.html"));
+
+mongoose.connect(
+    process.env.MONGODB_URL || "mongodb://localhost/kadal2kitchen-db",
+    {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
