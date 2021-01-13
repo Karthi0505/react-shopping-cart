@@ -4,6 +4,9 @@ import { productsReducer } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
 import { orderReducer } from "./reducers/orderReducers";
 
+import authReducers from "./reducers/authentication/authReducers";
+import errorReducers from "./reducers/authentication/errorReducers";
+
 const initialState = {};
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -11,8 +14,13 @@ const store = createStore(
     products: productsReducer,
     cart: cartReducer,
     order: orderReducer,
+    auth: authReducers,
+    errors: errorReducers
   }),
   initialState,
-  composeEnhancer(applyMiddleware(thunk))
+  composeEnhancer(
+    applyMiddleware(thunk)
+
+  )
 );
 export default store;
