@@ -26,7 +26,8 @@ app.get("/", (req, res) => res.sendFile(__dirmane + "/dist/index.html"));
 
 // Connect to MongoDB
 mongoose.connect(
-    process.env.MONGODB_URL || "mongodb://localhost/kadal2kitchen-db",
+    //process.env.MONGODB_URL || "mongodb://localhost/kadal2kitchen-db",
+    'mongodb+srv://react-shopping-cart-test:karthi()@cluster0.zr2bt.mongodb.net/react-shopping-cart-test?retryWrites=true&w=majority',
     {
       useNewUrlParser: true,
       useCreateIndex: true,
@@ -206,7 +207,7 @@ const email = req.body.email;
 // Sign token
         jwt.sign(
           payload,
-          keys.secretOrKey,
+          'secret',
           {
             expiresIn: 31556926 // 1 year in seconds
           },
