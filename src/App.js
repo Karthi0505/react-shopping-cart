@@ -24,6 +24,9 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 
 import { setCurrentUser, logoutUser, loginUser } from "./actions/authentication/authActions";
+import LoginLink from "./components/header/LoginLink";
+
+ 
 
 
 // Check for token to keep user logged in
@@ -62,11 +65,11 @@ class App extends Component {
                               <img src={FishIcon} alt="Kadal to Kitchen logo" />
                            </Link>                       
                            
+                            <Link to="/admin" className="text-light">Admin</Link> 
+                                
+                           <LoginLink />
+                                                 
                            
-                            <Dashboard />
-                            
-                           <Link to="/admin" className="text-light">Admin</Link>                      
-                           <Link to="/login" className="text-light">Login</Link>
                         </div>
                      </header>
                      <main>

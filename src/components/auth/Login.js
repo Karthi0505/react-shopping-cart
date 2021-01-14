@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authentication/authActions";
 import classnames from "classnames";
 
+import Button from 'react-bootstrap/Button';
+
 class Login extends Component {
   constructor() {
     super();
@@ -53,9 +55,11 @@ class Login extends Component {
 
   render() {
     const { errors } = this.state;
+
     if(this.props.auth.isAuthenticated) {
       console.log("loggen in");
     }
+    
     return (
       <div className="container">
         <div style={{ marginTop: "4rem" }} className="row">
@@ -108,12 +112,12 @@ class Login extends Component {
                 </span>
               </div>
               <div className="col s12">
-                <button
+                <Button variant="primary"
                   type="submit"
                   className=""
                 >
                   Login
-                </button>
+                </Button>
               </div>
             </form>
           </div>
