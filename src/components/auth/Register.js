@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authentication/authActions";
 import classnames from "classnames";
 
+import Button from 'react-bootstrap/Button';
+
 class Register extends Component {
   constructor() {
     super();
@@ -127,12 +129,11 @@ render() {
                 <span className="red-text">{errors.password2}</span>
               </div>
               <div className="col s12">
-                <button 
+                <Button variant="primary"
                   type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
                   Sign up
-                </button>
+                </Button>
               </div>
             </form>
           </div>
