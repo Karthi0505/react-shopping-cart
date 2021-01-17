@@ -27,7 +27,8 @@ app.get("/", (req, res) => res.sendFile(__dirmane + "/dist/index.html"));
 // Connect to MongoDB
 mongoose.connect(
     //process.env.MONGODB_URL || "mongodb://localhost/kadal2kitchen-db",
-    'mongodb+srv://react-shopping-cart-test:karthi()@cluster0.zr2bt.mongodb.net/react-shopping-cart-test?retryWrites=true&w=majority',
+  'mongodb+srv://react-shopping-cart-test:karthi()@cluster0.zr2bt.mongodb.net/react-shopping-cart-test?retryWrites=true&w=majority'
+  || "mongodb://localhost/kadal2kitchen-db",
     {
       useNewUrlParser: true,
       useCreateIndex: true,
@@ -77,9 +78,11 @@ const Order = mongoose.model(
                 type: String,
                 default: shortid.generate
             },
+            
             email: String,
             name: String,
             address: String,
+            
             total: Number,
             cartItems: [
                 {
@@ -131,6 +134,18 @@ const User = mongoose.model(
         type: String,
         required: true
       },
+      address: {
+        type: String,
+        required: true
+      },
+      phone: {
+        type: Number,
+        required: true
+      },
+      phone2: {
+        type: Number,
+        required: false
+      },
       password: {
         type: String,
         required: true
@@ -160,6 +175,9 @@ router.post("/register", (req, res) => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
+        address: req.body.address,
+        phone: req.body.phone,
+        phone2: req.body.phone2,
         password: req.body.password
       });
       // Hash password before saving in database

@@ -16,7 +16,9 @@ class LogoutLink extends Component {
     render() {
         return (
             <div>
-                <Button variant="secondary"
+                <Button
+                    className="mx-2"
+                    variant="secondary"
                     onClick={this.onLogoutClick}
                 >
                     Logout

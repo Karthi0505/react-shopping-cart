@@ -65,9 +65,10 @@ class App extends Component {
                               <img src={FishIcon} alt="Kadal to Kitchen logo" />
                            </Link>                       
                            
-                            <Link to="/admin" className="text-light">Admin</Link> 
-                                
-                           <LoginLink />
+                            <div className="d-flex align-items-center">
+                                <Link to="/admin" className="text-light mx-2">Admin</Link>
+                                <LoginLink />
+                            </div>
                                                  
                            
                         </div>
