@@ -13,6 +13,9 @@ class Register extends Component {
     this.state = {
       name: "",
       email: "",
+      address: "",
+      phone: "",
+      phone2: "",
       password: "",
       password2: "",
       errors: {}
@@ -44,6 +47,9 @@ class Register extends Component {
     const newUser = {
       name: this.state.name,
       email: this.state.email,
+      address: this.state.address,
+      phone: this.state.phone,
+      phone2: this.state.phone2,
       password: this.state.password,
       password2: this.state.password2
     };
@@ -100,6 +106,46 @@ render() {
                 <label htmlFor="email">Email</label>
                 <span className="red-text">{errors.email}</span>
               </div>
+              
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.address}
+                  error={errors.address}
+                  id="address"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.address
+                  })}
+                />
+                <label htmlFor="address">Address</label>
+                <span className="red-text">{errors.address}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.phone}
+                  error={errors.phone}
+                  id="phone"
+                  type="number"
+                  className={classnames("", {
+                    invalid: errors.phone
+                  })}
+                />
+                <label htmlFor="phone">Phone</label>
+                <span className="red-text">{errors.phone}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.phone2}
+                  error={errors.phone2}
+                  id="phone2"
+                  type="number"
+                />
+                <label htmlFor="phone2">Alternate Phone (optional)</label>
+              </div>
+
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}

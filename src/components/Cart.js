@@ -29,6 +29,7 @@ class Cart extends Component {
     };
     createOrder = (e) => {
         e.preventDefault(); /*Dont refresh when submiting form*/
+        
         const order = {
             name: this.state.name,
             email: this.state.email,
@@ -37,6 +38,7 @@ class Cart extends Component {
             total: this.props.cartItems.reduce((a, c) => a + c.price * c.count, 0),
         };
         this.props.createOrder(order);
+
     };
         
     handleShow = () => {
@@ -147,6 +149,9 @@ class Cart extends Component {
                                     Total:{" "}
                                     {cartItems.reduce((a, c) => a + c.price * c.count, 0)}
                                 </div>
+
+                                {/*<button onClick={this.createOrder}>Checkout</button>*/}
+
                                 <Button
                                     onClick={() => {
                                         this.setState({ showCheckout: true });
@@ -162,6 +167,7 @@ class Cart extends Component {
                                 <Fade right cascade>
                                     <div>
                                         <h4 className="h5">Enter Details</h4>
+
                                         <form onSubmit={this.createOrder}>
                                             <ul className="form-container list-unstyled">
                                                 <li className="form-group">
