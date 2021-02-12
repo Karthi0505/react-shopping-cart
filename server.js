@@ -79,9 +79,9 @@ const Order = mongoose.model(
                 default: shortid.generate
             },
             
-            email: String,
+            /*email: String,
             name: String,
-            address: String,
+            address: String,*/
             
             total: Number,
             cartItems: [
@@ -101,9 +101,9 @@ const Order = mongoose.model(
 
 app.post("/api/orders", async (req, res) => {
   if (
-    !req.body.name ||
+    /*!req.body.name ||
     !req.body.email ||
-    !req.body.address ||
+    !req.body.address ||*/
     !req.body.total ||
     !req.body.cartItems
   ) {

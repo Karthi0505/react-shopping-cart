@@ -11,9 +11,9 @@ class Cart extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name: "",
+            /*name: "",
             email: "",
-            address: "",
+            address: "",*/
             showCheckout: false,
         };
 
@@ -31,11 +31,11 @@ class Cart extends Component {
         e.preventDefault(); /*Dont refresh when submiting form*/
         
         const order = {
-            name: this.state.name,
+            /*name: this.state.name,
             email: this.state.email,
-            address: this.state.address,
+            address: this.state.address,*/
             cartItems: this.props.cartItems,
-            total: this.props.cartItems.reduce((a, c) => a + c.price * c.count, 0),
+            total: this.props.cartItems.reduce((a, c) => a + c.price * c.count, 0), /* accumulator */
         };
         this.props.createOrder(order);
 
@@ -73,7 +73,7 @@ class Cart extends Component {
                                     <h3 className="text-success">Your order has been placed.</h3>
                                     <h2>Order {order._id}</h2>
                                     <ul>
-                                        <li>
+                                        {/*<li>
                                             <span className="font-italic text-muted">Name: </span> 
                                             <span className="user-select-all">{order.name}</span>
                                         </li>
@@ -84,7 +84,7 @@ class Cart extends Component {
                                         <li>
                                             <span className="font-italic text-muted">Address: </span> 
                                             <span className="user-select-all">{order.address}</span>
-                                        </li>
+                                        </li>*/}
                                         <li>
                                             <span className="font-italic text-muted">Date: </span> 
                                             <span className="user-select-all">{order.createdAt}</span>
@@ -167,7 +167,15 @@ class Cart extends Component {
                                 <Fade right cascade>
                                     <div>
                                         <h4 className="h5">Enter Details</h4>
-
+                                        <Button
+                                            variant="success"
+                                            size="lg"
+                                            block 
+                                            onClick={ this.createOrder }
+                                        >
+                                            Checkouttt
+                                        </Button>
+                                    {/*
                                         <form onSubmit={this.createOrder}>
                                             <ul className="form-container list-unstyled">
                                                 <li className="form-group">
@@ -214,7 +222,7 @@ class Cart extends Component {
                                                     </Button>
                                                 </li>
                                             </ul>
-                                        </form>
+                                        </form>*/}
                                     </div>
                                 </Fade>
                             )}
