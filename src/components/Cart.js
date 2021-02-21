@@ -7,6 +7,9 @@ import Zoom from "react-reveal/Zoom";
 import { removeFromCart } from "../actions/cartActions";
 import { createOrder, clearOrder } from "../actions/orderActions";
 
+import PropTypes from "prop-types";
+
+
 class Cart extends Component {
     constructor(props){
         super(props);
@@ -23,6 +26,14 @@ class Cart extends Component {
 			show: false,
 		};
     }
+
+
+    /*checkLoginStatus() {
+        axios.get("/api/users/login", { withCredentials: true }).then(response => { console.log("Logged in?", response); }).catch(error => { console.log("check login error", error);})
+    }
+    componentDidMount() {
+        this.checkLoginStatus();
+    }*/
     
     handleInput = (e) => {
         this.setState({ [e.target.name]: e.target.value });
@@ -50,7 +61,12 @@ class Cart extends Component {
     };
     
     render() {
-        const {cartItems, order} = this.props;
+        const { cartItems, order } = this.props;
+        
+        if(this.props.auth.isAuthenticated) {
+            console.log("loggennnn in");
+        }
+
         return (
             <div className="cart pt-3">
                 {cartItems.length === 0 ? (
@@ -162,19 +178,29 @@ class Cart extends Component {
                                     Proceed
                                 </Button>
                             </div>
-                            
+                         
+
                             {this.state.showCheckout && (
                                 <Fade right cascade>
                                     <div>
-                                        <h4 className="h5">Enter Details</h4>
+                                        <h4 className="h5">Checkout</h4>
+                                    
+                                    
+                                    {this.props.auth.isAuthenticated ? (
                                         <Button
                                             variant="success"
                                             size="lg"
-                                            block 
-                                            onClick={ this.createOrder }
+                                            block
+                                            onClick={this.createOrder}
                                         >
                                             Checkouttt
                                         </Button>
+                                        ) :
+                                        (
+                                           <div className="error">Please login before checkout</div>     
+                                        )
+                                    }
+
                                     {/*
                                         <form onSubmit={this.createOrder}>
                                             <ul className="form-container list-unstyled">
@@ -236,10 +262,15 @@ class Cart extends Component {
     }
 }
 
-export default connect(
+Cart.propTypes = {
+    auth: PropTypes.object.isRequired,
+};
+
+export default connect(   
     (state) => ({
         order: state.order.order,
         cartItems: state.cart.cartItems,
+        auth: state.auth
     }),
     { removeFromCart, createOrder, clearOrder }
 )(Cart);
