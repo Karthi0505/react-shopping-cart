@@ -51,13 +51,18 @@ class Login extends Component {
 
     this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
     console.log(userData);
+    console.log(userData.email);
   };
+
 
   render() {
     const { errors } = this.state;
 
     if(this.props.auth.isAuthenticated) {
       console.log("loggen in");
+      /*if (userData.email) {
+        console.log("has email");
+      }*/
     }
     
     return (
@@ -142,4 +147,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { loginUser }
-)(Login);
+)(Login); 
