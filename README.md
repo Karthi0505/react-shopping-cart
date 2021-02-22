@@ -15,6 +15,9 @@ For starting frontend (in terminal-2): <br/>
 -------------------------------------------------
 
 Things done until:
+- Showing products from DB
+- Showing product filter by [lowest/highest/featured]
+- Showing product filter by size [s/m/l/all]
 - Adding product to 
 - removing product from cart
 - User registration
