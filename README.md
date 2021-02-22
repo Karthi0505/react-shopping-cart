@@ -18,7 +18,7 @@ Things done until:
 - Showing products from DB
 - Showing product filter by [lowest/highest/featured]
 - Showing product filter by size [s/m/l/all]
-- Adding product to 
+- Adding product to cart
 - removing product from cart
 - User registration
 - Login
@@ -28,3 +28,8 @@ Things done until:
 Major pending things:
 - Admin user login authentication
 - Payment gateway
+
+-------------------------------------------------
+
+Used MERN stack [Mongodb, Express, React, Node]
+Redux, Moongoose
