@@ -21,7 +21,7 @@ import AdminScreen from "./screens/AdminScreen";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import Dashboard from "./components/dashboard/Dashboard";
+/*import Dashboard from "./components/dashboard/Dashboard";*/
 
 import { setCurrentUser, logoutUser, loginUser } from "./actions/authentication/authActions";
 import LoginLink from "./components/header/LoginLink";
@@ -79,9 +79,9 @@ class App extends Component {
                         
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/login" component={Login} />
-                        <Switch>
+                        {/*<Switch>
                             <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                        </Switch>
+                        </Switch>*/}
                      </main>
                      
                      <footer className="d-flex justify-content-center align-items-center">

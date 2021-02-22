@@ -38,6 +38,15 @@ class Cart extends Component {
     handleInput = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
+        
+    handleShow = () => {
+        this.setState({ show: true });
+    };
+    handleClose = () => {
+        this.setState({ show: false });
+        this.props.clearOrder();
+    };
+
     createOrder = (e) => {
         e.preventDefault(); /*Dont refresh when submiting form*/
         
@@ -49,23 +58,15 @@ class Cart extends Component {
             total: this.props.cartItems.reduce((a, c) => a + c.price * c.count, 0), /* accumulator */
         };
         this.props.createOrder(order);
-
-    };
-        
-    handleShow = () => {
-        this.setState({ show: true });
-    };
-    handleClose = () => {
-        this.setState({ show: false });
-        this.props.clearOrder();
+        this.handleShow();
     };
     
     render() {
         const { cartItems, order } = this.props;
         
-        if(this.props.auth.isAuthenticated) {
+        /*if(this.props.auth.isAuthenticated) {
             console.log("loggennnn in");
-        }
+        }*/
 
         return (
             <div className="cart pt-3">
@@ -254,7 +255,7 @@ class Cart extends Component {
                             )}
                         </div>
                     )}
-                    
+                
                 </div>
                 
             </div>
