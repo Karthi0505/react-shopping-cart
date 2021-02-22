@@ -23,7 +23,7 @@ Things done until:
 - User registration
 - Login
 - Proceed to checkout
-- Admin page
+- Admin page viewing orders
 
 Major pending things:
 - Admin user login authentication
