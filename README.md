@@ -12,6 +12,7 @@ For starting server (in terminal-1): <br/>
 For starting frontend (in terminal-2): <br/>
 **npm start**
 
+Note: Needs Mongodb setup
 -------------------------------------------------
 
 Things done until:
